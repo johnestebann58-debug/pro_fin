@@ -1,7 +1,42 @@
 body {
+  background: #0a0a0a;
+  color: #e5e5e5;
+  font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+}
 
-    display: flex;
-    justify-content: center;
+.container {
+  width: 360px;
+}
 
-  }
+h2 {
+  font-weight: 500;
+  margin-bottom: 20px;
+}
 
+p {
+  line-height: 1.6;
+  color: #a3a3a3;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background: transparent;
+  border: 1px solid #262626;
+  color: #e5e5e5;
+  outline: none;
+  border-radius: 6px;
+}
+
+input:focus {
+  border-color: #525252;
+}
+
+#output {
+  margin-top: 20px;
+  font-size: 14px;
+}
