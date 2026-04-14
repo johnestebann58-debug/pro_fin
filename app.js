@@ -1,72 +1,35 @@
-const aprendices = [
+const prompt = require("prompt-sync")();
+
+const aprendices = [ 
     { nombre: "Ana", nota: 4.5, programa: "ADSO" },
-    { nombre: "Luis", nota: 2.8, programa: "ADSO" },
+    { nombre: "Luis",nota: 2.8, programa: "ADSO" },
     { nombre: "Marta", nota: 3.7, programa: "Diseno Web" },
-    { nombre: "Pedro", nota: 1.9, programa: "ADSO" },
-    { nombre: "Sofia", nota: 5.0, programa: "Diseno Web" }
-];
+    {nombre: "Pedro", nota: 1.9, programa: "ADSO" },
+    { nombre: "Sofia", nota: 5.0, programa:"Diseno Web" } ];
 
-const output = document.getElementById("output");
+let opcion = "";
 
-// Mostrar todos
-function mostrarTodos() {
-    output.innerHTML = aprendices
-        .map(a => `<p>${a.nombre} - ${a.nota} - ${a.programa}</p>`)
-        .join("");
-}
+while (opcion !== "9") {
+    console.log("==MENU==");
+    console.log("1.LISTA ESTUDIANTES");
+    console.log("2.APROBADOS");
+    console.log("3.REPROBADOS");
+    console.log("4.MAYUSCULAS");
+    console.log("5.PROOMEDIO");
+    console.log("6.MAYOR A MENOR NOTA");
+    console.log("7.CLASIFICAR NOTA");
+    console.log("8.SALIR");
 
-// Aprobados
-function mostrarAprobados() {
-    const res = aprendices.filter(a => a.nota >= 3);
-    output.innerHTML = res.map(a => `<p>${a.nombre}</p>`).join("");
-}
+    opcion = prompt("ESCRIBA UNA OPCION: ");
+    
+    switch (opcion) {
 
-// Reprobados
-function mostrarReprobados() {
-    const res = aprendices.filter(a => a.nota < 3);
-    output.innerHTML = res.map(a => `<p>${a.nombre}</p>`).join("");
-}
+        case"1":
+        console.table(aprendices);
+        break;
 
-// Mayúsculas
-function mostrarMayus() {
-    output.innerHTML = aprendices
-        .map(a => `<p>${a.nombre.toUpperCase()}</p>`)
-        .join("");
-}
-
-// Promedio
-function mostrarPromedio() {
-    const total = aprendices.reduce((acc, a) => acc + a.nota, 0);
-    const prom = (total / aprendices.length).toFixed(2);
-    output.innerHTML = `<h3>Promedio: ${prom}</h3>`;
-}
-
-// Ordenar
-function ordenarNotas() {
-    const ordenados = [...aprendices].sort((a, b) => b.nota - a.nota);
-    output.innerHTML = ordenados
-        .map(a => `<p>${a.nombre} - ${a.nota}</p>`)
-        .join("");
-}
-
-// Clasificar con switch
-function clasificarNota() {
-    const nota = parseFloat(document.getElementById("notaInput").value);
-    let nivel;
-
-    switch (true) {
-        case (nota < 3):
-            nivel = "Bajo";
-            break;
-        case (nota < 4):
-            nivel = "Básico";
-            break;
-        case (nota < 4.6):
-            nivel = "Alto";
-            break;
-        default:
-            nivel = "Superior";
+        case"2":
+        console.table(aprendices.filter(a => a.nota >= 3));
+        break;
     }
-
-    output.innerHTML = `<h3>Nivel: ${nivel}</h3>`;
 }
