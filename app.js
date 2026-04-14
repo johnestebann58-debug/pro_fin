@@ -9,7 +9,6 @@ const aprendices = [
 const input = document.getElementById("opcion");
 const output = document.getElementById("output");
 
-// Detectar cuando presionas ENTER
 input.addEventListener("keydown", function(e) {
   if (e.key === "Enter") {
     ejecutarOpcion(input.value);
