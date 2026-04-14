@@ -8,40 +8,38 @@ const aprendices = [
 
 const output = document.getElementById("output");
 
-// Mostrar todos
 function mostrarTodos() {
     output.innerHTML = aprendices
         .map(a => `<p>${a.nombre} - ${a.nota} - ${a.programa}</p>`)
         .join("");
 }
 
-// Aprobados
 function mostrarAprobados() {
     const res = aprendices.filter(a => a.nota >= 3);
     output.innerHTML = res.map(a => `<p>${a.nombre}</p>`).join("");
 }
 
-// Reprobados
+
 function mostrarReprobados() {
     const res = aprendices.filter(a => a.nota < 3);
     output.innerHTML = res.map(a => `<p>${a.nombre}</p>`).join("");
 }
 
-// Mayúsculas
+
 function mostrarMayus() {
     output.innerHTML = aprendices
         .map(a => `<p>${a.nombre.toUpperCase()}</p>`)
         .join("");
 }
 
-// Promedio
+
 function mostrarPromedio() {
     const total = aprendices.reduce((acc, a) => acc + a.nota, 0);
     const prom = (total / aprendices.length).toFixed(2);
     output.innerHTML = `<h3>Promedio: ${prom}</h3>`;
 }
 
-// Ordenar
+
 function ordenarNotas() {
     const ordenados = [...aprendices].sort((a, b) => b.nota - a.nota);
     output.innerHTML = ordenados
@@ -52,6 +50,7 @@ function ordenarNotas() {
 // Clasificar con switch
 function clasificarNota() {
     const nota = parseFloat(document.getElementById("notaInput").value);
+    const output = document.getElementById("output");
     let nivel;
 
     switch (true) {
