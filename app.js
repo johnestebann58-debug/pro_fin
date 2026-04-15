@@ -9,6 +9,53 @@ const aprendices = [
 const input = document.getElementById("opcion");
 const output = document.getElementById("output");
 
+input.addEventListener("keydown", function(e) {
+  if (e.key === "Enter") {
+    ejecutarOpcion();
+  }
+});
+
+function ejecutarOpcion() {
+  const opcion = parseInt(input.value);
+
+  switch (opcion) {
+    case 1:
+      mostrarTodos();
+      break;
+
+    case 2:
+      mostrarAprobados();
+      break;
+
+    case 3:
+      mostrarReprobados();
+      break;
+
+    case 4:
+      mostrarMayus();
+      break;
+
+    case 5:
+      mostrarPromedio();
+      break;
+
+    case 6:
+      ordenarNotas();
+      break;
+
+    case 7:
+      clasificarNota();
+      break;
+
+    default:
+      output.innerHTML = "<p>Opción inválida</p>";
+  }
+
+  input.value = ""; // limpia el input
+}
+
+// ================= FUNCIONES =================
+
 function mostrarTodos() {
   output.innerHTML = aprendices
     .map(a => `<p>${a.nombre} - ${a.nota} - ${a.programa}</p>`)
@@ -44,29 +91,25 @@ function ordenarNotas() {
     .join("");
 }
 
-// Clasificar con switch
 function clasificarNota() {
-  const nota = parseFloat(document.getElementById("notaInput").value);
+  const nota = parseFloat(prompt("Ingresa la nota:"));
   let nivel;
 
   if (isNaN(nota)) {
-    output.innerHTML = "<p>Ingresa una nota válida</p>";
+    output.innerHTML = "<p>Nota inválida</p>";
     return;
   }
 
   switch (true) {
     case (nota < 3):
-      nivel = "Bajo";
+      nivel = "Baja";
       break;
     case (nota < 4):
-      nivel = "Básico";
-      break;
-    case (nota < 4.6):
-      nivel = "Alto";
+      nivel = "Media";
       break;
     default:
-      nivel = "Superior";
+      nivel = "Alta";
   }
 
-  output.innerHTML = `<h3>Nivel: ${nivel}</h3>`;
+  output.innerHTML = `<h3>La nota es: ${nivel}</h3>`;
 }
