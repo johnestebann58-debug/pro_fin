@@ -9,78 +9,64 @@ const aprendices = [
 const input = document.getElementById("opcion");
 const output = document.getElementById("output");
 
-input.addEventListener("keydown", function(e) {
-  if (e.key === "Enter") {
-    ejecutarOpcion(input.value);
+function mostrarTodos() {
+  output.innerHTML = aprendices
+    .map(a => `<p>${a.nombre} - ${a.nota} - ${a.programa}</p>`)
+    .join("");
+}
+
+function mostrarAprobados() {
+  const res = aprendices.filter(a => a.nota >= 3);
+  output.innerHTML = res.map(a => `<p>${a.nombre}</p>`).join("");
+}
+
+function mostrarReprobados() {
+  const res = aprendices.filter(a => a.nota < 3);
+  output.innerHTML = res.map(a => `<p>${a.nombre}</p>`).join("");
+}
+
+function mostrarMayus() {
+  output.innerHTML = aprendices
+    .map(a => `<p>${a.nombre.toUpperCase()}</p>`)
+    .join("");
+}
+
+function mostrarPromedio() {
+  const total = aprendices.reduce((acc, a) => acc + a.nota, 0);
+  const prom = (total / aprendices.length).toFixed(2);
+  output.innerHTML = `<h3>Promedio: ${prom}</h3>`;
+}
+
+function ordenarNotas() {
+  const ordenados = [...aprendices].sort((a, b) => b.nota - a.nota);
+  output.innerHTML = ordenados
+    .map(a => `<p>${a.nombre} - ${a.nota}</p>`)
+    .join("");
+}
+
+// Clasificar con switch
+function clasificarNota() {
+  const nota = parseFloat(document.getElementById("notaInput").value);
+  let nivel;
+
+  if (isNaN(nota)) {
+    output.innerHTML = "<p>Ingresa una nota válida</p>";
+    return;
   }
-});
 
-function ejecutarOpcion(opcion) {
-
-  switch (opcion) {
-
-    case "1":
-      output.innerHTML = aprendices
-        .map(a => `<p>${a.nombre} - ${a.nota} - ${a.programa}</p>`)
-        .join("");
+  switch (true) {
+    case (nota < 3):
+      nivel = "Bajo";
       break;
-
-    case "2":
-      output.innerHTML = aprendices
-        .filter(a => a.nota >= 3)
-        .map(a => `<p>${a.nombre}</p>`)
-        .join("");
+    case (nota < 4):
+      nivel = "Básico";
       break;
-
-    case "3":
-      output.innerHTML = aprendices
-        .filter(a => a.nota < 3)
-        .map(a => `<p>${a.nombre}</p>`)
-        .join("");
+    case (nota < 4.6):
+      nivel = "Alto";
       break;
-
-    case "4":
-      output.innerHTML = aprendices
-        .map(a => `<p>${a.nombre.toUpperCase()}</p>`)
-        .join("");
-      break;
-
-    case "5":
-      const prom = aprendices.reduce((acc, a) => acc + a.nota, 0) / aprendices.length;
-      output.innerHTML = `<h3>Promedio: ${prom.toFixed(2)}</h3>`;
-      break;
-
-    case "6":
-      const ordenados = [...aprendices].sort((a, b) => b.nota - a.nota);
-      output.innerHTML = ordenados
-        .map(a => `<p>${a.nombre} - ${a.nota}</p>`)
-        .join("");
-      break;
-
-    case "7":
-      const nota = parseFloat(document.getElementById("notaInput").value);
-      let nivel;
-
-      switch (true) {
-        case (nota < 3):
-          nivel = "Bajo";
-          break;
-        case (nota < 4):
-          nivel = "Básico";
-          break;
-        case (nota < 4.6):
-          nivel = "Alto";
-          break;
-        default:
-          nivel = "Superior";
-      }
-
-      output.innerHTML = `<h3>Nivel: ${nivel}</h3>`;
-      break;
-
     default:
-      output.innerHTML = "<p>Opción inválida</p>";
+      nivel = "Superior";
   }
 
-  input.value = "";
+  output.innerHTML = `<h3>Nivel: ${nivel}</h3>`;
 }
